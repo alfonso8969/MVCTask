@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace MVCTask.Entities {
     public class Task {
@@ -13,6 +14,9 @@ namespace MVCTask.Entities {
 
         public List<Step> Steps { get; set; }
         public List<FilesAttach> FilesAttach { get; set; }
+
+        public string CreatorUserId { get; set; }
+        public IdentityUser CreatorUser { get; set; }
 
 
     }

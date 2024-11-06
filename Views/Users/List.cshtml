@@ -1,0 +1,49 @@
+﻿@model UsersListViewModel
+@{
+    ViewData["Title"] = "Users list";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.Message != string.Empty)
+{
+    <div class="alert alert-success" role="alert">
+        @Model.Message
+    </div>
+}
+
+<h1>Users list</h1>
+@if (Model.Users.Count > 0)
+{
+    <table class="table-hover table-striped table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Users[0].Email)
+                </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Users)
+            {
+                <tr>
+ 
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+
+                    <td>
+                        <a class="btn btn-primary me-2" asp-action="DoRemoveFromAdmin" asp-route-email="@item.Email">Admin</a> |
+                        <a class="btn btn-secondary me-2" asp-action="DoRemoveFromAdmin" asp-route-email="@item.Email">No Admin</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No users found</p>
+}
+
+

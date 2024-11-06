@@ -14,6 +14,8 @@ namespace MVCTask {
         public DbSet<Entities.Task> Tasks { get; set; }
         public DbSet<Step> Steps { get; set; }
         public DbSet<FilesAttach> FilesAttach { get; set; }
+        public DbSet<Person> Persons { get; set; }
+        public DbSet<Address> Addresses { get; set; }
 
     }
 }

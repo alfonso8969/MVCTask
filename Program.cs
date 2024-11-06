@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using MVCTask;
+using MVCTask.Interfaces;
+using MVCTask.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,10 +19,15 @@ builder.Services.AddControllersWithViews(
         options.Filters.Add(new AuthorizeFilter(policyUsersAuthenticates));
     });
 
+builder.Services.AddTransient<IPersonRepository, PersonRepository>();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TaskDbContext") ?? throw new InvalidOperationException("Connection string 'TaskDbContext' not found.")));
 
-builder.Services.AddAuthentication();
+builder.Services.AddAuthentication().AddMicrosoftAccount(options => {
+    options.ClientId = builder.Configuration["MicrosoftClientId"];
+    options.ClientSecret = builder.Configuration["MicrosoftSecretId"];
+});
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => {
     options.SignIn.RequireConfirmedAccount = false;
 
