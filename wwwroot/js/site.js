@@ -9,4 +9,13 @@ $("#navbarDropdown").on("click", function () {
     } else {
         $(".dropdown-menu").css("display", "none");
     }
+}); 
+
+$("#dropdownLanguage").on("click", function () {
+    let d = $('.dropdown-menu').css('display')
+    if (d == 'none') {
+        $(".dropdown-menu").css("display", "block");
+    } else {
+        $(".dropdown-menu").css("display", "none");
+    }
 });

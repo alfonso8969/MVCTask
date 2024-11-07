@@ -2,10 +2,13 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using MVCTask;
 using MVCTask.Interfaces;
 using MVCTask.Repositories;
+using MVCTask.Services;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +20,10 @@ var policyUsersAuthenticates = new AuthorizationPolicyBuilder()
 builder.Services.AddControllersWithViews(
     options => {
         options.Filters.Add(new AuthorizeFilter(policyUsersAuthenticates));
+    }).AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+    .AddDataAnnotationsLocalization(options => {
+        options.DataAnnotationLocalizerProvider = (type, factory) =>
+            factory.Create(typeof(SharedResource));
     });
 
 builder.Services.AddTransient<IPersonRepository, PersonRepository>();
@@ -41,7 +48,18 @@ builder.Services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.Ap
         options.AccessDeniedPath = "/users/login";
     });
 
+builder.Services.AddLocalization(options => {
+    options.ResourcesPath = "Resources";
+});
+
+builder.Services.Configure<RequestLocalizationOptions>(options => {
+    options.SetDefaultCulture(Constants.CulturesUISupported[0].Value)
+        .AddSupportedCultures(Constants.CulturesUISupported.Select(c => c.Value).ToArray())
+        .AddSupportedUICultures(Constants.CulturesUISupported.Select(c => c.Value).ToArray());
+});
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment()) {

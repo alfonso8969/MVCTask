@@ -1,32 +1,37 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using System.Security.Claims;
 @inject SignInManager<IdentityUser> SignInManager
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer localizer
 
 @{
-    
-     string GetUserId() {
-        if (User.Identity.IsAuthenticated) {
+
+    string GetUserId()
+    {
+        if (User.Identity.IsAuthenticated)
+        {
             var idClaim = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-            if (idClaim != null) {
-                var userId =idClaim.Value;
+            if (idClaim != null)
+            {
+                var userId = idClaim.Value;
                 return userId;
             }
         }
         throw new UnauthorizedAccessException("The user is not authenticated");
-     }
+    }
 }
 
 <ul class="navbar-nav align-self-center">
-    @if (SignInManager.IsSignedIn(User)) {
+    @if (SignInManager.IsSignedIn(User))
+    {
         <li class="nav-item dropdown mt-1">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Hello @User.Identity.Name!
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" asp-action="Index" asp-controller="Person" asp-route-id="@GetUserId()">Account</a>
-                <a class="dropdown-item" href="#">Another action</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
+               
             </div>
         </li>
         <li class="nav-item">
@@ -36,7 +41,9 @@
                 </button>
             </form>
         </li>
-    } else {
+    }
+    else
+    {
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Register">Register</a>
         </li>

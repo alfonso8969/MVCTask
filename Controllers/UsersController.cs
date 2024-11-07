@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using MVCTask.Models;
 using MVCTask.Services;
 using System.Security.Claims;
@@ -12,18 +13,22 @@ namespace MVCTask.Controllers {
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly ApplicationDbContext context;
+        private readonly IStringLocalizer<UsersController> localizer;
 
         public UsersController(UserManager<IdentityUser> userManager,
                                            SignInManager<IdentityUser> signInManager,
-                                           ApplicationDbContext context) {
+                                           ApplicationDbContext context,
+                                           IStringLocalizer<UsersController> localizer) {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.context = context;
-        }
+            this.localizer = localizer;
+        }       
 
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Register() {
+
             return View();
         }
 
@@ -69,7 +74,7 @@ namespace MVCTask.Controllers {
                 if (result.Succeeded) {
                     return RedirectToAction("Index", "Home");
                 } else {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, localizer["InvalidLogin"]);
                 }
             }
             return View(model);
@@ -103,13 +108,13 @@ namespace MVCTask.Controllers {
 
             var message = "";
             if (remoteError is not null) {
-                message = $"Error from external provider: {remoteError}";
+                message = localizer["ErrorExtProv: {0}", remoteError];
                 return RedirectToAction("Login", routeValues: new { message });
             }
 
             var info = await signInManager.GetExternalLoginInfoAsync();
             if (info is null) {
-                message = "Error loading external login information.";
+                message = localizer["ErrorExtLoad"];
                 return RedirectToAction("Login", routeValues: new { message });
             }
 
@@ -123,7 +128,7 @@ namespace MVCTask.Controllers {
             if (info.Principal.HasClaim(c => c.Type == ClaimTypes.Email)) {
                 email = info.Principal.FindFirstValue(ClaimTypes.Email);
             } else {
-                message = "Email claim not found from external provider.";
+                message = localizer["EmailNotFoundExternalProvider"];
                 return RedirectToAction("Login", routeValues: new { message });
             }
 
@@ -148,7 +153,7 @@ namespace MVCTask.Controllers {
                 return LocalRedirect(returnUrl);
             }
 
-            message = "A error occurred while adding the login to the user.";
+            message = localizer["ErrorLogin"];
             return RedirectToAction("Login", routeValues: new { message });
         }
 
@@ -168,6 +173,16 @@ namespace MVCTask.Controllers {
                 Message = message
             };
 
+            var urlBuilder = new UriBuilder(
+                                   Request.Scheme,
+                                   Request.Host.Host,
+                                   Request.Host.Port ?? -1,
+                                   Request.PathBase + Request.Path,
+                                   Request.QueryString.ToString()
+                                   );
+
+            ViewBag.url = urlBuilder.ToString();
+
             return View("list", model);
         }
 
@@ -176,7 +191,7 @@ namespace MVCTask.Controllers {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
-
+            var message = "";
             var user = await context.Users.FirstOrDefaultAsync(u => u.Email == email);
             if (user is null) {
                 return NotFound();
@@ -184,10 +199,12 @@ namespace MVCTask.Controllers {
             var isAdmin = await userManager.IsInRoleAsync(user, Constants.RolAdmin);
             if (!isAdmin) {
                 await userManager.AddToRoleAsync(user, Constants.RolAdmin);
-                return RedirectToAction("ListUsers", new { message = $"User {email} is now an admin." });
+                message = localizer["UserAdmin", user.Email];
+                return RedirectToAction("ListUsers", new { message });
             } else {
                 await userManager.RemoveFromRoleAsync(user, Constants.RolAdmin);
-                return RedirectToAction("ListUsers", new { message = $"User {email} is no longer an admin." });
+                message = localizer["UserNotAdmin", user.Email];
+                return RedirectToAction("ListUsers", new { message });
             }
         }
     }

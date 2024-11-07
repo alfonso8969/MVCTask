@@ -1,4 +1,17 @@
 ﻿@using MVCTask.Services
+@using System.Globalization
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+
+@inject IViewLocalizer Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +41,31 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="ListUsers">Users list</a>
                             </li>
-                        }                       
+                        }
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdownLanguage" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Languages
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownLanguage">
+                                <a class="dropdown-item" asp-action="ChangeLanguage" asp-controller="home" asp-route-lang="es-ES" asp-route-returnUrl="@Context.Request.Path">
+                                    <img src="https://cdn.countryflags.com/thumbs/spain/flag-400.png" width="30" class="img-fluid">
+                                    Spanish
+                                </a>
+                                <a class="dropdown-item" asp-action="ChangeLanguage" asp-controller="home" asp-route-lang="en-US" asp-route-returnUrl="@Context.Request.Path">
+                                    <img src="https://www.countryflags.com/wp-content/uploads/united-kingdom-flag-png-large.png" width="32" class="img-fluid">
+                                    English
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item mt-2">
+                            <span class="mr-2">Language selected: @CultureInfo.CurrentCulture.Name</span>
+                            @if (@CultureInfo.CurrentCulture.Name == "es-ES") {
+                                <img src="https://cdn.countryflags.com/thumbs/spain/flag-400.png" width="30" class="img-fluid" title="Spanish">
+                            } else {
+                                <img src="https://www.countryflags.com/wp-content/uploads/united-kingdom-flag-png-large.png" width="32" class="img-fluid" title="English">
+                            }
+                 
+                        </li>
                     </ul>
                     <partial name="_LinksLogin" />
                 </div>
@@ -46,6 +83,7 @@
             &copy; 2024 - MVCTask - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+    <partial name="_TranslationsJS" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
