@@ -8,7 +8,6 @@ using MVCTask;
 using MVCTask.Interfaces;
 using MVCTask.Repositories;
 using MVCTask.Services;
-using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +26,8 @@ builder.Services.AddControllersWithViews(
     });
 
 builder.Services.AddTransient<IPersonRepository, PersonRepository>();
+builder.Services.AddTransient<IUsersService, UsersService>();
+builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TaskDbContext") ?? throw new InvalidOperationException("Connection string 'TaskDbContext' not found.")));

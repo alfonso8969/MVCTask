@@ -117,7 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AreYouSure" xml:space="preserve">
+    <value>¿Estás seguro de hacer esto?</value>
+  </data>
+  <data name="DeleteAnswer" xml:space="preserve">
+    <value>¿Desea borrar la tarea </value>
+  </data>
   <data name="ErrorMessage" xml:space="preserve">
-    <value>Algo fue mal, por favor pruebe otra vez má tade</value>
+    <value>Algo fue mal, por favor pruebe otra vez más tarde</value>
+  </data>
+  <data name="ResourceNotFound" xml:space="preserve">
+    <value>Recurso no encontrado</value>
+  </data>
+  <data name="UnknowError" xml:space="preserve">
+    <value>Error desconicido</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Si</value>
   </data>
 </root>

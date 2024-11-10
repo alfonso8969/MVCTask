@@ -117,8 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddNewTask" xml:space="preserve">
+    <value>Agregar nueva tarea</value>
+  </data>
   <data name="GreetWelcome" xml:space="preserve">
     <value>Aprende acera de &lt;a href="https://learn.microsoft.com/aspnet/core"&gt;la construcción de páginas Web con .NET Core&lt;/a&gt;</value>
+  </data>
+  <data name="spinner-loading" xml:space="preserve">
+    <value>Cargando...</value>
+  </data>
+  <data name="TasksList" xml:space="preserve">
+    <value>Lista tareas</value>
+  </data>
+  <data name="ThereAreNoTasks" xml:space="preserve">
+    <value>No hay tareas que visualizar</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Bienvenido</value>
