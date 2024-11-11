@@ -108,6 +108,12 @@ async function handleClickTask(task) {
     taskEditVM.title(json.title);
     taskEditVM.description(json.description);
 
+    taskEditVM.steps([]);
+
+    json.steps.forEach(step => {
+        taskEditVM.steps.push(new StepViewModel({ ...step, editMode: false }));
+    });
+
     modalEditTaskBootstrap.show();
 
 }
@@ -181,6 +187,12 @@ async function deleteTask(task) {
 function getIndexTaskInEdit() {
     return taskListViewModel.tasks().findIndex(t => t.id() == taskEditVM.id);
 }
+
+function getTaskInEdit() {
+    const index = getIndexTaskInEdit();
+    return taskListViewModel.tasks()[index];
+}
+
 
 $(function () {
     $("#sortable").sortable({

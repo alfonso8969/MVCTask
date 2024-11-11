@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer localizer
-<div class="modal fade" id="modal-edit-task" tabindex="-1">
+<div class="modal fade" id="modal-edit-task" tabindex="-1" aria-hidden="false">
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -24,6 +24,9 @@
                                         event: { change: handleChangeEditTask }">
 
                             </textarea>
+                        </div>
+                        <div class="mb-3">
+                            <partial action="" name="_Steps" />
                         </div>
                     </div>
                     <div class="col-lg-3">

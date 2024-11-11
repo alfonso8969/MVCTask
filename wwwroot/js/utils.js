@@ -33,7 +33,7 @@ function confirmAction({ callBackAcept, callbackCancel, title }) {
         if (result.isConfirmed) {
             callBackAcept();
         } else if (callbackCancel) {
-            // El usuario ha presionado el botón de cancelar
+            // The user has pressed the cancel button
             callbackCancel();
         }
     })

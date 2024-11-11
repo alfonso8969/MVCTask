@@ -1,6 +1,9 @@
 ﻿@model RegisterViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer localizer
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = localizer["Register"];
 }
 
 <h1>Register</h1>
@@ -29,9 +32,9 @@
                 <input asp-for="ConfirmPassword" class="form-control" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
-            <a asp-controller="Users" asp-action="Login" class="btn btn-success">Login</a>
-            <a asp-controller="Users" asp-action="ExternalLogin" asp-route-provider="Microsoft" class="btn btn-link">Continue with Microsoft?</a>
+            <button type="submit" class="btn btn-primary">@localizer["Register"]</button>
+            <a asp-controller="Users" asp-action="Login" class="btn btn-success">@localizer["Login"]</a>
+            <a asp-controller="Users" asp-action="ExternalLogin" asp-route-provider="Microsoft" class="btn btn-link">@localizer["LoginWithMicrosoft"]</a>
         </form>
     </div>
 </div>

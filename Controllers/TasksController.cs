@@ -31,8 +31,10 @@ namespace MVCTask.Controllers {
 
             var userId = usersService.GetUserId();
 
-            var task = await context.Tasks.FirstOrDefaultAsync(t => t.Id == id &&
-            t.CreatorUserId == userId);
+            var task = await context.Tasks
+                .Include(t => t.Steps.OrderBy(s => s.Order))
+                .FirstOrDefaultAsync(t => t.Id == id &&
+                    t.CreatorUserId == userId);
 
             if (task is null) {
                 return NotFound();

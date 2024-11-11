@@ -117,25 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AreYouSure" xml:space="preserve">
-    <value>Are you sure to do this?</value>
+  <data name="AddDescription" xml:space="preserve">
+    <value>Agrague una descripción</value>
   </data>
-  <data name="DeleteAnswer" xml:space="preserve">
-    <value>Are you sure to delete the task  </value>
+  <data name="AddNewStep" xml:space="preserve">
+    <value>Añadir un nuevo paso</value>
   </data>
-  <data name="DeleteStepAnswer" xml:space="preserve">
-    <value>Are you sure you want to delete this step?</value>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancelar</value>
   </data>
-  <data name="ErrorMessage" xml:space="preserve">
-    <value>Something went wrong. Please try again later.</value>
+  <data name="Delete" xml:space="preserve">
+    <value>Borrar</value>
   </data>
-  <data name="ResourceNotFound" xml:space="preserve">
-    <value>The resource was not found</value>
+  <data name="Save" xml:space="preserve">
+    <value>Guardar</value>
   </data>
-  <data name="UnknowError" xml:space="preserve">
-    <value>Unknown error</value>
-  </data>
-  <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
+  <data name="StepsOfTask" xml:space="preserve">
+    <value>Pasos de la tarea</value>
   </data>
 </root>

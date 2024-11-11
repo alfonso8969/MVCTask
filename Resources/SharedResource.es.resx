@@ -135,4 +135,64 @@
   <data name="PasWordNotMatch" xml:space="preserve">
     <value>Las contraseñas no coinciden</value>
   </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Nombre usuario</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirme contraseña</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="Street" xml:space="preserve">
+    <value>Calle</value>
+  </data>
+  <data name="StreetNumber" xml:space="preserve">
+    <value>Número de calle</value>
+  </data>
+  <data name="Plant" xml:space="preserve">
+    <value>Planta</value>
+  </data>
+  <data name="ApNumber" xml:space="preserve">
+    <value>Número piso</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Ciudad</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>País</value>
+  </data>
+  <data name="Region" xml:space="preserve">
+    <value>Provincía</value>
+  </data>
+  <data name="ACommunity" xml:space="preserve">
+    <value>Comunidad autonoma</value>
+  </data>
+  <data name="PostalCode" xml:space="preserve">
+    <value>Código postal</value>
+  </data>
+  <data name="RegularExpression" xml:space="preserve">
+    <value>El campo no es válido</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Apellidos</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Número de teléfono</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Borrar</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Editar</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Volver </value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
 </root>

@@ -123,6 +123,9 @@
   <data name="DeleteAnswer" xml:space="preserve">
     <value>¿Desea borrar la tarea </value>
   </data>
+  <data name="DeleteStepAnswer" xml:space="preserve">
+    <value>¿Estás seguro de que quieres eliminar este paso?</value>
+  </data>
   <data name="ErrorMessage" xml:space="preserve">
     <value>Algo fue mal, por favor pruebe otra vez más tarde</value>
   </data>

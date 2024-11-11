@@ -6,19 +6,24 @@ namespace MVCTask.Entities {
     public class Person {
         public int PersonId {get; set;}
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Name is required")]
-        [StringLength(50, ErrorMessage = "Name must be less than 50 characters")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Error.Required")]
+        [StringLength(50, ErrorMessage = "StringLength")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "RegularExpression")]
+        [Display(Name = "Name")]
         public string Name {get; set;}
      
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Last Name is required")]
-        [StringLength(50, ErrorMessage = "Last Name must be less than 50 characters")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Error.Required")]
+        [StringLength(50, ErrorMessage = "StringLength")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "RegularExpression")]
+        [Display(Name = "LastName")]
         public string LastName {get; set;}
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Email is required")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Error.Required")]
         [DataType(DataType.EmailAddress)]
-        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        [EmailAddress(ErrorMessage = "EmailAddress")]
         public string Email { get; set; }
 
+        [Display(Name = "PhoneNumber")]
         public string PhoneNumber  {get; set;}
 
         public int Id {get; set;}

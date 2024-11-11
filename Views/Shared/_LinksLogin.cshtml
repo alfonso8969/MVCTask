@@ -17,7 +17,8 @@
                 return userId;
             }
         }
-        throw new UnauthorizedAccessException("The user is not authenticated");
+        var message = localizer["UserNotAuth"];
+        throw new UnauthorizedAccessException(message.ToString());
     }
 }
 
@@ -26,10 +27,10 @@
     {
         <li class="nav-item dropdown mt-1">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Hello @User.Identity.Name!
+                @localizer["Hello"] @User.Identity.Name!
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" asp-action="Index" asp-controller="Person" asp-route-id="@GetUserId()">Account</a>
+                <a class="dropdown-item" asp-action="Index" asp-controller="Person" asp-route-id="@GetUserId()">@localizer["Account"]</a>
                 <div class="dropdown-divider"></div>
                
             </div>
@@ -37,7 +38,7 @@
         <li class="nav-item">
             <form class="form-inline" asp-action="logout" asp-controller="users">
                 <button type="submit" class="nav-link btn btn-link text-dark">
-                    Logout
+                    @localizer["Logout"]
                 </button>
             </form>
         </li>
@@ -45,10 +46,10 @@
     else
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Register">Register</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Register">@localizer["Register"]</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Login">Login</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Login">@localizer["Login"]</a>
         </li>
     }
 </ul>

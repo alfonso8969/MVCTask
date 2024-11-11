@@ -8,6 +8,7 @@ using MVCTask;
 using MVCTask.Interfaces;
 using MVCTask.Repositories;
 using MVCTask.Services;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,8 @@ builder.Services.AddControllersWithViews(
     .AddDataAnnotationsLocalization(options => {
         options.DataAnnotationLocalizerProvider = (type, factory) =>
             factory.Create(typeof(SharedResource));
+    }).AddJsonOptions(options => {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     });
 
 builder.Services.AddTransient<IPersonRepository, PersonRepository>();

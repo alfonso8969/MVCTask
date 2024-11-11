@@ -1,7 +1,10 @@
 ﻿@using MVCTask.Entities
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer localizer
 @model Person
 @{
-    ViewData["Title"] = "Person";
+    ViewData["Title"] = @localizer["Person"];
 }
 
 <h1>@Model.Name @Model.LastName</h1>
@@ -27,17 +30,17 @@
         <div class="fc-button-group">
             <a asp-action="Edit" asp-route-id="@Model.PersonId" class="btn-w150 btn btn-primary">
                 <i class="fa fa-edit bg-primary"></i>
-                Edit
+                @localizer["Edit"]
             </a> |
             <a asp-action="Delete" asp-route-id="@Model.PersonId" class="btn-w150 btn btn-danger">
                 <i class="fa fa-trash-alt bg-danger"></i>
-                Delete
+                @localizer["Delete"]
             </a> |
             <a asp-action="InfoAddress" asp-route-personId="@Model.PersonId" class="btn-w150 btn btn-success">
                 <i class="fa fa-home bg-success"></i>                
-                Address
+                @localizer["Address"]
             </a> |
-            <a asp-controller="home" asp-action="Index">Back</a>
+            <a asp-controller="home" asp-action="Index">@localizer["Back"]</a>
 
         </div>
     </div>

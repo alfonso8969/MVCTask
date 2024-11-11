@@ -68,3 +68,7 @@ body {
 [name=task]:hover {
  background-color: lightgray;
 }
+
+#stepDescription {
+ cursor: pointer;
+}

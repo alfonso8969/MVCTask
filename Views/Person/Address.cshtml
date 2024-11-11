@@ -1,10 +1,14 @@
 ﻿@using MVCTask.Entities
 @using Microsoft.AspNetCore.Identity
 @using System.Security.Claims;
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer localizer
 @inject SignInManager<IdentityUser> SignInManager
+
 @model Address
 @{
-    ViewData["Title"] = "Address";
+    ViewData["Title"] = localizer["Address"];
     string GetUserId() {
         if (User.Identity.IsAuthenticated) {
             var idClaim = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
@@ -14,12 +18,12 @@
                 return userId;
             }
         }
-        throw new UnauthorizedAccessException("The user is not authenticated");
+        throw new UnauthorizedAccessException(localizer["UserNotAuth"].ToString());
     }
 
 }
 
-<h1>Address</h1>
+<h1>@localizer["Address"]</h1>
 
 <form>
 <div class="row">
@@ -63,13 +67,13 @@
             <div class="fc-button-group">
                 <a asp-action="Edit" asp-route-id="@Model.AddressId" class="btn-w150 btn btn-primary">
                     <i class="fa fa-edit bg-primary"></i>
-                    Edit
+                    @localizer["Edit"]
                 </a> |
                 <a asp-action="Delete" asp-route-id="@Model.AddressId" class="btn-w150 btn btn-danger">
                     <i class="fa fa-trash-alt bg-danger"></i>
-                    Delete
+                    @localizer["Delete"]
                 </a> |                
-                <a asp-action="Index" asp-route-id="@GetUserId()">Back</a>
+                <a asp-action="Index" asp-route-id="@GetUserId()">@localizer["Back"]</a>
             </div>
     </div>
     <div class="col-md-4">

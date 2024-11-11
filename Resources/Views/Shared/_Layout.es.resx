@@ -117,25 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AreYouSure" xml:space="preserve">
-    <value>Are you sure to do this?</value>
+  <data name="English" xml:space="preserve">
+    <value>Inglés</value>
   </data>
-  <data name="DeleteAnswer" xml:space="preserve">
-    <value>Are you sure to delete the task  </value>
+  <data name="Home" xml:space="preserve">
+    <value>Inicio</value>
   </data>
-  <data name="DeleteStepAnswer" xml:space="preserve">
-    <value>Are you sure you want to delete this step?</value>
+  <data name="Languages" xml:space="preserve">
+    <value>Idiomas</value>
   </data>
-  <data name="ErrorMessage" xml:space="preserve">
-    <value>Something went wrong. Please try again later.</value>
+  <data name="LanguageSelected" xml:space="preserve">
+    <value>Idioma seleccionado</value>
   </data>
-  <data name="ResourceNotFound" xml:space="preserve">
-    <value>The resource was not found</value>
+  <data name="Privacy" xml:space="preserve">
+    <value>Privacidad</value>
   </data>
-  <data name="UnknowError" xml:space="preserve">
-    <value>Unknown error</value>
+  <data name="Spanish" xml:space="preserve">
+    <value>Español</value>
   </data>
-  <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
+  <data name="UsersList" xml:space="preserve">
+    <value>Lista de usuarios</value>
   </data>
 </root>
