@@ -47,8 +47,8 @@ async function getTasks() {
     const json = await response.json();
     taskListViewModel.tasks([]);
 
-    json.forEach(valor => {
-        taskListViewModel.tasks.push(new TaskElementListViewModel(valor));
+    json.forEach(value => {
+        taskListViewModel.tasks.push(new TaskElementListViewModel(value));
     });
 
     taskListViewModel.loading(false);
@@ -107,6 +107,8 @@ async function handleClickTask(task) {
     taskEditVM.id = json.id;
     taskEditVM.title(json.title);
     taskEditVM.description(json.description);
+    taskEditVM.createdDate(json.createdAt);
+    taskEditVM.isCompleted(json.isCompleted);
 
     taskEditVM.steps([]);
 
@@ -122,7 +124,8 @@ async function handleChangeEditTask() {
     const obj = {
         id: taskEditVM.id,
         title: taskEditVM.title(),
-        description: taskEditVM.description()
+        description: taskEditVM.description(),
+        isCompleted: taskEditVM.isCompleted()
     };
 
     if (!obj.title) {
@@ -149,7 +152,6 @@ async function editCompleteTask(task) {
 
     if (!response.ok) {
         handleErrorApi(response);
-        throw new Error("error");
     }
 }
 

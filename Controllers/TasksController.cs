@@ -40,6 +40,9 @@ namespace MVCTask.Controllers {
                 return NotFound();
             }
 
+            var completedSteps = task.Steps.Count(s => s.IsCompleted);
+            task.IsCompleted = completedSteps == task.Steps.Count;
+
             return task;
         }
 
@@ -57,7 +60,7 @@ namespace MVCTask.Controllers {
             if (tasksExists) {
                 biggerOrder = await context.Tasks.Where(t => t.CreatorUserId == userId)
                     .Select(t => t.Order).MaxAsync();
-            }
+            }         
 
             var task = new Entities.Task {
                 Title = title,
@@ -85,6 +88,12 @@ namespace MVCTask.Controllers {
 
             if (task is null) {
                 return NotFound();
+            }
+
+            if (taskEdit.Steps is not null) {
+                var completedSteps = taskEdit.Steps.Count(s => s.IsCompleted);
+                task.IsCompleted = completedSteps == taskEdit.Steps.Count;
+               
             }
 
             task.Title = taskEdit.Title;

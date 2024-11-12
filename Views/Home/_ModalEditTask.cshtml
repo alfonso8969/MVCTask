@@ -1,10 +1,16 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer localizer
-<div class="modal fade" id="modal-edit-task" tabindex="-1" aria-hidden="false">
+<div class="modal fade" id="modal-edit-task" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal-edit-task-title" data-bind="text: title"></h5>
+                <h5 class="modal-title" id="modal-edit-task-title" data-bind="text: title"></h5><br >
+                <div data-bind="visible: isCompleted" class="fw-bold p-2 mt-1">
+                    <span class="text-success">(@localizer["Completed"])</span>
+                </div>
+                <span class="text-info mx-2 mt-1">@localizer["CreatedAt"]</span>
+                <div data-bind="date: createdDate" class="fw-bold d-block mt-1">
+                </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">

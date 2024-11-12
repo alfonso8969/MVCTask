@@ -12,10 +12,10 @@ $("#navbarDropdown").on("click", function () {
 }); 
 
 $("#dropdownLanguage").on("click", function () {
-    let d = $('.dropdown-menu').css('display')
+    let d = $('.language').css('display')
     if (d == 'none') {
-        $(".dropdown-menu").css("display", "block");
+        $(".language").css("display", "block");
     } else {
-        $(".dropdown-menu").css("display", "none");
+        $(".language").css("display", "none");
     }
 });

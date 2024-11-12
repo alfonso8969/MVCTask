@@ -2,15 +2,9 @@
 using System.Security.Claims;
 
 namespace MVCTask.Services {
-    public class UsersService: IUsersService {
+    public class UsersService(IHttpContextAccessor httpContextAccessor): IUsersService {
 
-        private readonly HttpContext httpContext;
-
-
-        public UsersService(IHttpContextAccessor httpContextAccessor) {
-            httpContext = httpContextAccessor.HttpContext;
-        }
-
+        private readonly HttpContext httpContext = httpContextAccessor.HttpContext;
 
         public string GetUserId() {
             if (httpContext.User.Identity.IsAuthenticated) {

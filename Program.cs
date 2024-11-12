@@ -10,6 +10,7 @@ using MVCTask.Repositories;
 using MVCTask.Services;
 using System.Text.Json.Serialization;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 var policyUsersAuthenticates = new AuthorizationPolicyBuilder()
@@ -39,6 +40,7 @@ builder.Services.AddAuthentication().AddMicrosoftAccount(options => {
     options.ClientId = builder.Configuration["MicrosoftClientId"];
     options.ClientSecret = builder.Configuration["MicrosoftSecretId"];
 });
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => {
     options.SignIn.RequireConfirmedAccount = false;
 
@@ -55,9 +57,17 @@ builder.Services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.Ap
 builder.Services.AddLocalization(options => {
     options.ResourcesPath = "Resources";
 });
+// ... other code ...
+
+HttpContextAccessor httpContextAccessor = new(); // Change type from IHttpContextAccessor to HttpContextAccessor
+var languages = httpContextAccessor.HttpContext?.Request.GetTypedHeaders()
+                       .AcceptLanguage?
+                       .OrderByDescending(x => x.Quality ?? 1) // Quality defines priority from 0 to 1, where 1 is the highest.
+                       .Select(x => x.Value.ToString())
+                       .ToArray() ?? Constants.CulturesUISupported.Select(c => c.Value).ToArray();
 
 builder.Services.Configure<RequestLocalizationOptions>(options => {
-    options.SetDefaultCulture(Constants.CulturesUISupported[0].Value)
+    options.SetDefaultCulture(languages[0])
         .AddSupportedCultures(Constants.CulturesUISupported.Select(c => c.Value).ToArray())
         .AddSupportedUICultures(Constants.CulturesUISupported.Select(c => c.Value).ToArray());
 });

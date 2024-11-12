@@ -46,7 +46,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="dropdownLanguage" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 @localizer["Languages"]
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownLanguage">
+                            <div class="language" aria-labelledby="dropdownLanguage">
                                 <a class="dropdown-item" asp-action="ChangeLanguage" asp-controller="home" asp-route-lang="es-ES" asp-route-returnUrl="@Context.Request.Path">
                                     <img src="https://cdn.countryflags.com/thumbs/spain/flag-400.png" width="30" class="img-fluid">
                                     @localizer["Spanish"]
@@ -87,6 +87,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment-with-locales.js" integrity="sha512-1cMYNLuYP3nNQUA42Gj7XvcJN5lAukNNw3fE1HtK3Fs1DA5JPrNQHv5g/FM+1yL5cT6x3sf2o1mKmTpVO0iGcA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="~/lib/knockoutjs/3.5.1/content/scripts/knockout-3.5.1.debug.js"></script>
     <script src="~/lib/knockoutjs/3.5.1/content/scripts/knockout-3.5.1.js"></script>
     <script src="https://kit.fontawesome.com/6fbdbd90cc.js" crossorigin="anonymous"></script>

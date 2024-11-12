@@ -40,7 +40,7 @@ async function handleClickSaveStep(step) {
         await insertStep(step, data, idTask);
     } else {
         updateStep(data, step.id());
-    }  
+    }
 }
 
 async function insertStep(step, data, idTask) {
@@ -111,6 +111,33 @@ function handleClickCheckboxStep(step) {
     }
     task.completedSteps(actualCompletedSteps);
 
+    let steps = [];
+    taskEditVM.steps().forEach((s) => {
+        steps.push(s);
+    });
+
+    let completedTaskSteps = steps.filter((s) => {
+        return s.isCompleted();
+    }).length;
+
+    taskEditVM.isCompleted(completedTaskSteps == taskEditVM.steps().length);
+
+    const taskToEdit = {
+        id: taskEditVM.id,
+        title: taskEditVM.title(),
+        description: taskEditVM.description(),
+        isCompleted: taskEditVM.isCompleted(),
+        steps: taskEditVM.steps().map((s) => {
+            return {
+                id: s.id(),
+                description: s.description(),
+                isCompleted: s.isCompleted()
+            }
+        })
+    };
+    editCompleteTask(taskToEdit);
+
+
     return true;
 
 }
@@ -121,7 +148,7 @@ function handleClickDeleteStep(step) {
     confirmAction({
         callBackAcept: () => {
             deleteStep(step);
-            modalEditTaskBootstrap.show();          
+            modalEditTaskBootstrap.show();
         },
         callBackCancel: () => {
             modalEditTaskBootstrap.show();

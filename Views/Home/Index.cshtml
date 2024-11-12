@@ -18,10 +18,10 @@
             <div data-bind="text: title, hidden: isNew" class="fw-bold">
             </div>
 
+
             <div name="steps-resume" data-bind="visible: totalSteps() > 0">
                 <span data-bind="text: completedSteps"></span>/<span data-bind="text: totalSteps"></span>
-                <span data-bind="text: completedPercent"></span>%
-                @* css: { 'text-': completedPercent <= 25 ? 'danger' : completedPercent > 25 || completedPercent <= 75  ? 'info' : 'success' } *@
+                <span data-bind="text: completedPercent() + '%', css: completedPercent() <= 25 ? 'text-danger' : completedPercent() > 25 && completedPercent() <= 75  ? 'text-primary' : 'text-success'"></span>
             </div>
 
             <input type="text" name="task-title" autocomplete="off" class="w-25"
@@ -57,6 +57,18 @@
         const modalEditTask = document.getElementById('modal-edit-task');
         const modalEditTaskBootstrap = new bootstrap.Modal(modalEditTask);
 
+        ko.bindingHandlers.date = {
+            init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+                var jsonDate = valueAccessor();                
+                const date = new Date(jsonDate());
+                var ret = moment(date.toISOString().slice(0, 10)).format('MM/DD/YYYY');
+                element.innerHTML = ret;
+            },
+            update: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+
+            }
+        };
+
         function taskListViewModelFn() {
             var self = this;
             self.tasks = ko.observableArray([]);
@@ -70,10 +82,12 @@
             });
         }
 
-        function TaskElementListViewModel({ id, title, totalSteps, completedSteps }) {
+        function TaskElementListViewModel({ id, title, isCompleted, createdDate, totalSteps, completedSteps }) {
             var self = this;
             self.id = ko.observable(id);
             self.title = ko.observable(title);
+            self.isCompleted = ko.observable(isCompleted);
+            self.createdDate = ko.observable(createdDate);
             self.totalSteps = ko.observable(totalSteps);
             self.completedSteps = ko.observable(completedSteps);
             self.isNew = ko.pureComputed(function () {
@@ -93,6 +107,8 @@
             id: 0,
             title: ko.observable(''),
             description: ko.observable(''),
+            isCompleted: ko.observable(false),
+            createdDate: ko.observable(new Date()),
             steps: ko.observableArray([]),
         }
 
@@ -113,10 +129,7 @@
             self.isNew = ko.pureComputed(function () {
                 return self.id() == 0;
             })
-            
         }
-
-
 
         getTasks(urlTasks);
 
